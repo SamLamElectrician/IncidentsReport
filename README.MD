@@ -36,7 +36,7 @@ I did consider running express, however, I picked up flask super recently and fo
 
 I used Next.js because React is recently deprecated and not offered support. I do admit I did not use next.js to it's full capacity with the serverside rendering. I used nextUi as it was a clean approach to tables while displaying the correct data. It was my only option because I would have not wanted to use jinja templating compared to how robust next.js is.
 
-Approvements
+Improvements
 =============================
 I am still working on some of these because this was a super cool project to work on
 
