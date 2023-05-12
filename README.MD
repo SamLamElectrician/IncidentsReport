@@ -4,47 +4,48 @@ How to Run
 ### Backend
 
 Using a flask backend
-1. Enable your venv using ```virtualenv env``` in the terminal
-2. Start your venv using ```cd flaskServer && env/Scripts/activate``` and on linux based machines ```cd flaskServer && env/bin/activate```
-3. Install the packages of Flask, Flask-Cors, os, requests, pandas, dotenv using ```pip3 install <packageName>```
-4. Add Login and Password to an ENV file
-5. Run the following command in your terminal ```python app.py``` to start the server
+1.Enable your virtual environment (venv) by running ```virtualenv env``` in the terminal.
+2. Activate your virtual environment by running ```cd flaskServer && env/Scripts/activate``` on Windows or ```cd flaskServer && env/bin/activate``` on Linux-based machines.
+3. Install the required packages: Flask, Flask-Cors, os, requests, pandas, and dotenv. You can use the command ```pip3 install <packageName>```
+4. Add login credentials (username and password) to an environment (ENV) file.
+5. Run the following command in your terminal to start the server: ```python app.py```
 
-*Windows computer might have issues due to pip not install properly
-1. Using the windows search bar, search %appdata% and open it
-2. Navigate one folder up and go into Local folder
-3. Navigate one folder down to Local folder
-4. Copy the path to your python
-5. Using command prompt ```cd path to python folder```
-6. For any packages you would want to use ```python -m pip install <packageName>```
+Note for Windows Users: If you encounter issues with pip installation, follow these steps:
+
+1. Use the Windows search bar to search for %appdata% and open it.
+2. Navigate one folder up and go into the Local folder.
+3. Navigate one folder down to the Local folder again.
+4. Copy the path to your Python installation.
+5. Open the command prompt and navigate to the Python folder using the cd command.
+6. To install any required packages, use the command ```python -m pip install <packageName>```
 
 ### Frontend
-1. Go into your client folder using ```cd client```
-2. using npm or yarn, install the packages from your package.json file using ```npm i```
-3. run ```npm run dev``` to start the next server
+1. Navigate to the client folder using the command ```cd client```
+2. Install the required packages from the package.json file using npm or yarn. ```Run npm i```
+3. Start the frontend server by running ```npm run dev```
 
 Overall approach
 =============================
 ### Backend
-I am one for learning so I decided to do it in flask consider that it is elevate's current backend stack. I used the dotenv package because I did not want to expose the Login/Password and financial lost if it does get exposed. Using python build-in template strings, I tried to make it dry as possible
+For the backend, I chose Flask because it is part of Elevate's current backend stack. To protect sensitive login credentials and prevent financial loss if they get exposed, I used the dotenv package. Additionally, I utilized Python's built-in template strings to ensure a DRY (Don't Repeat Yourself) approach.
 
-Using Pandas, I transmuted the data after fetching employee data to change the ip address to match the employee number and return the final product. I choose to do using Pandas instead JS because it was more efficient to run.
+To manipulate the data fetched from the employee data source, I used the Pandas library to replace the IP address with the employee number and return the final result. I chose Pandas over JavaScript because it provided more efficient execution.
 
-I did consider running express, however, I picked up flask super recently and found it was extremly efficient compared to JS. 
+While Express was a consideration, I found Flask to be extremely efficient and recently picked it up, making it a suitable choice for this project.
 
 ### Frontend
 
-I used Next.js because React is recently deprecated and not offered support. I do admit I did not use next.js to it's full capacity with the serverside rendering. I used nextUi as it was a clean approach to tables while displaying the correct data. It was my only option because I would have not wanted to use jinja templating compared to how robust next.js is.
+I opted for Next.js for the frontend because React is recently deprecated and no longer supported. Although I didn't fully utilize Next.js's server-side rendering capabilities, I used Next UI as a clean and efficient approach to displaying tables with the correct data. It was my preferred option over using Jinja templating due to the robustness of Next.js.
 
 Improvements
 =============================
-I am still working on some of these because this was a super cool project to work on
+I am actively working on improving the project with the following enhancements:
 
-1. I am trying to implement a search function, left the search bar there because it made sense in terms of UX
-2. Maybe data transmutation to create a graph later down the line 
-3. adding a loading state--> nextUI is somewhat new and there was a bug with conditional rendering with Tables
-4.  Color coding of how critical the risk is
-5.  Learn Pandas a little bit better so I don't have to use a lambda function because it operates on O(N^2)
+-Implementing a search function to enhance user experience.
+-Exploring the possibility of data transmutation for graph creation in the future.
+-Adding a loading state for better user feedback. There was a bug with conditional rendering in Next UI, which I'm in the process of resolving.
+-Implementing color coding to indicate the criticality of risks.
+-Further improving my knowledge of Pandas to avoid using lambda functions, as they have an O(N^2) time complexity.
 
 
 
