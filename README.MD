@@ -3,13 +3,13 @@ How to Run
 
 ### Backend
 
-Using a flask backend
+Using a flask backend<br />
 
-1.Enable your virtual environment (venv) by running ```virtualenv env``` in the terminal.
-2. Activate your virtual environment by running ```cd flaskServer && env/Scripts/activate``` on Windows or ```cd flaskServer && env/bin/activate``` on Linux-based machines.
-3. Install the required packages: Flask, Flask-Cors, os, requests, pandas, and dotenv. You can use the command ```pip3 install <packageName>```
-4. Add login credentials (username and password) to an environment (ENV) file.
-5. Run the following command in your terminal to start the server: ```python app.py```
+1.Enable your virtual environment (venv) by running ```virtualenv env``` in the terminal.<br />
+2. Activate your virtual environment by running ```cd flaskServer && env/Scripts/activate``` on Windows or ```cd flaskServer && env/bin/activate``` on Linux-based machines.<br />
+3. Install the required packages: Flask, Flask-Cors, os, requests, pandas, and dotenv. You can use the command ```pip3 install <packageName>```<br />
+4. Add login credentials (username and password) to an environment (ENV) file.<br />
+5. Run the following command in your terminal to start the server: ```python app.py```<br />
 
 Note for Windows Users: If you encounter issues with pip installation, follow these steps:
 
