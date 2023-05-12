@@ -4,11 +4,16 @@ import { Table } from "@nextui-org/react";
 import tableStyles from "../styles/table.module.css";
 import { formatDate } from "../utils/timeConvert";
 
+import { Input } from "@nextui-org/react";
+
 export default function TableExecutable() {
 	const data = useContext(Context);
 	return (
-		<div>
-			<h3 className={tableStyles.wrapper}>DATA FOR DENIAL INCIDENTS</h3>
+		<div className={tableStyles.wrapper}>
+			<div className={tableStyles.tableHeader}>
+				<h3>DATA FOR DENIAL INCIDENTS</h3>
+				<Input placeholder='Search' bordered />
+			</div>
 			<div className={tableStyles.tableContainer}>
 				<Table
 					striped
@@ -23,7 +28,7 @@ export default function TableExecutable() {
 				>
 					<Table.Header>
 						<Table.Column>Priority</Table.Column>
-						<Table.Column>Machine IP</Table.Column>
+						<Table.Column>Reported by</Table.Column>
 						<Table.Column>Date</Table.Column>
 					</Table.Header>
 					<Table.Body>

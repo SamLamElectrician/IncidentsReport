@@ -3,12 +3,18 @@ import { Context } from "../page";
 import { Table } from "@nextui-org/react";
 import tableStyles from "../styles/table.module.css";
 import { formatDate } from "../utils/timeConvert";
+import { Input } from "@nextui-org/react";
 
 export default function TableDenial() {
 	const data = useContext(Context);
 	return (
 		<div>
-			<h3 className={tableStyles.wrapper}>DATA FOR DENIAL INCIDENTS</h3>
+			<h3 className={tableStyles.wrapper}>
+				<div className={tableStyles.tableHeader}>
+					<h3>DATA FOR DENIAL INCIDENTS</h3>
+					<Input placeholder='Search' bordered />
+				</div>
+			</h3>
 			<div className={tableStyles.tableContainer}>
 				<Table
 					aria-label='Example table with static content'

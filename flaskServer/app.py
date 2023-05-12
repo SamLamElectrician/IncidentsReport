@@ -3,6 +3,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 import requests
+import pandas as pd
 
 # load environment variables
 load_dotenv()
@@ -33,7 +34,28 @@ def incidents():
 @app.route('/incidents/<incident_type>/')
 def specific_incidents(incident_type):
     incidents = get_incidents(incident_type)
+    response = requests.get(f'{BASE_URL}identities/', auth=(USERNAME, PASSWORD))
+    if response.status_code == 200:
+        ip_to_employee = response.json()
+
+        # Convert the incidents to a pandas DataFrame
+        df = pd.DataFrame(incidents['results'])
+        print(df)
+        # Replace the values in the 'internal_ip' column with the employee numbers, if 'internal_ip' column exists
+        if response.status_code == 200:
+            ip_to_employee = response.json()
+
+        for result in incidents['results']:
+            if 'internal_ip' in result:
+                if result['internal_ip'] in ip_to_employee:
+                    result['internal_ip'] = ip_to_employee[result['internal_ip']]
+            
+            if 'machine_ip' in result:
+                if result['machine_ip'] in ip_to_employee:
+                    result['machine_ip'] = ip_to_employee[result['machine_ip']]
+
     return jsonify(incidents)
+    
 
 @app.route('/identities')
 def get_employee_ids():
@@ -43,3 +65,5 @@ def get_employee_ids():
 
 if __name__ == "__main__":
     app.run(port=9000)
+
+

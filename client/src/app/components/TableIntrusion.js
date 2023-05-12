@@ -1,39 +1,23 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../page";
-import { Table, useCollator } from "@nextui-org/react";
+import { Table } from "@nextui-org/react";
 import tableStyles from "../styles/table.module.css";
 import { formatDate } from "../utils/timeConvert";
+import { Input } from "@nextui-org/react";
 
 export default function TableIntrusion() {
 	const data = useContext(Context);
-	const collator = useCollator({ numeric: true });
-	const [sortDescriptor, setSortDescriptor] = useState(null);
-	const [sortedData, setSortedData] = useState(data.results || []);
-	console.log(data.results);
-
-	useEffect(() => {
-		setSortedData(data.results || []);
-	}, [data.results]);
-
-	useEffect(() => {
-		if (sortDescriptor !== null) {
-			const sorted = [...sortedData].sort((a, b) => {
-				let first = a[sortDescriptor.column];
-				let second = b[sortDescriptor.column];
-				let cmp = collator.compare(first, second);
-				if (sortDescriptor.direction === "descending") {
-					cmp *= -1;
-				}
-				return cmp;
-			});
-
-			setSortedData(sorted);
-		}
-	}, [sortDescriptor]);
-
 	return (
 		<div>
-			<h3 className={tableStyles.wrapper}>DATA FOR DENIAL INCIDENTS</h3>
+			<h3 className={tableStyles.wrapper}>
+				<div className={tableStyles.tableHeader}>
+					<h3>DATA FOR INTRUSION INCIDENTS</h3>
+					<form>
+						<Input placeholder='Search' bordered />
+					</form>
+				</div>
+			</h3>
+
 			<div className={tableStyles.tableContainer}>
 				<Table
 					aria-label='Example table with static content'
@@ -44,18 +28,17 @@ export default function TableIntrusion() {
 						width: "100%",
 						padding: "0",
 					}}
-					sortDescriptor={sortDescriptor}
-					onSortChange={setSortDescriptor}
 				>
 					<Table.Header>
-						<Table.Column allowsSorting>Priority</Table.Column>
+						<Table.Column>Priority</Table.Column>
 						<Table.Column>Reported By</Table.Column>
 						<Table.Column>Source IP</Table.Column>
-						<Table.Column allowsSorting>Date</Table.Column>
+						<Table.Column>Date</Table.Column>
 					</Table.Header>
-					<Table.Body items={sortedData}>
-						{Array.isArray(sortedData) &&
-							sortedData.map(
+
+					<Table.Body>
+						{Array.isArray(data.results) &&
+							data.results.map(
 								({ priority, internal_ip, source_ip, timestamp }, index) => (
 									<Table.Row key={index}>
 										<Table.Cell>{priority.toUpperCase()}</Table.Cell>

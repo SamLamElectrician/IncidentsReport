@@ -10,8 +10,9 @@ export default function Home() {
 	//use this use state to set the fetch call to store incident type
 	const [IncidentType, setIncidentType] = useState(new Set(["all"]));
 	const [incidentReport, setIncidentReport] = useState([]);
+	const [loading, setLoading] = useState(true);
 
-	const [employeeNumber, setEmployeeNumber] = useState([]);
+	// const [employeeNumber, setEmployeeNumber] = useState([]);
 
 	// This function is used to check and confirm the end points
 	const checkIncidentType = () => {
@@ -24,52 +25,44 @@ export default function Home() {
 
 			return incidentUrl;
 		}
-		// else {
-		// 	return baseUrl;
-		// }
 	};
 
 	//This function is used to fetch the data, could use some error handling
 	const fetchIncidentData = async () => {
-		let url;
 		try {
-			url = checkIncidentType();
-			if (url) {
-				let response = await fetch(url);
-				let IncidentData = await response.json();
-				// console.log("finally" + JSON.stringify(data));
-				setIncidentReport(IncidentData);
+			const url = checkIncidentType();
+			if (!url) {
+				console.log("Invalid incident type");
+				return;
 			}
+			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			const incidentData = await response.json();
+			setIncidentReport(incidentData);
 		} catch (error) {
-			console.error(error);
-	};
-
-	const fetchEmployeeData = async () => {
-		let url = "http:localhost:9000/identities";
-		try {
-			let response = await fetch(url);
-			let EmployeeData = await response.json();
-			setEmployeeNumber(EmployeeData);
-		} catch (error) {
-			console.error(error);
+			console.error("Error fetching incident data:", error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	// fetching the data based on each change of Incident type
 	useEffect(() => {
 		fetchIncidentData();
-		fetchEmployeeData()
+		// fetchEmployeeData();
 	}, [IncidentType]);
 
 	return (
 		<NextUIProvider>
 			{/* providing the data to the tables using a useContext */}
-			<Context.Provider value={incidentReport, employeeNumber}>
+			<Context.Provider value={incidentReport}>
 				<Header
 					setIncidentType={setIncidentType}
 					IncidentType={IncidentType}
 				></Header>
-				<DataTable IncidentType={IncidentType}></DataTable>
+				<DataTable IncidentType={IncidentType} loading={loading}></DataTable>
 			</Context.Provider>
 		</NextUIProvider>
 	);

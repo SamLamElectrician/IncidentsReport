@@ -1,10 +1,41 @@
 .wrapper {
-	display: flex;
-	justify-content: center;
-	margin-top: 0%;
+	width: 60vw;
+	margin: 0 auto;
 }
 
 .tableContainer {
 	margin: 0 auto;
 	width: 60vw;
+}
+.tableHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1%;
+}
+
+.noTable {
+	font-size: 1.6rem;
+}
+
+.intro {
+	font-size: 1.3rem;
+}
+
+.wrapperNoTable {
+	display: flex;
+	justify-content: center;
+	flex-flow: row wrap;
+	text-align: center;
+	width: 40%;
+	margin: 0 auto;
+}
+
+.link {
+	font-size: 1.1rem;
+}
+
+.linkTree {
+	display: flex;
+	flex-direction: column;
 }
