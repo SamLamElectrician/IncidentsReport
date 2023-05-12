@@ -44,6 +44,7 @@ I am still working on some of these because this was a super cool project to wor
 2. Maybe data transmutation to create a graph later down the line 
 3. adding a loading state--> nextUI is somewhat new and there was a bug with conditional rendering with Tables
 4.  Color coding of how critical the risk is
+5.  Learn Pandas a little bit better so I don't have to use a lambda function because it operates on O(N^2)
 
 
 
