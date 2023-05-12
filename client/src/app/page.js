@@ -1,17 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import Header from "./components/Header";
 import DataTable from "./components/DataTable";
 import { NextUIProvider } from "@nextui-org/react";
 
+export const Context = createContext();
+
 export default function Home() {
-	//use this use state to set the fetch call
+	//use this use state to set the fetch call to store incident type
 	const [IncidentType, setIncidentType] = useState(new Set(["all"]));
 	const [incidentReport, setIncidentReport] = useState([]);
 
+	const [employeeNumber, setEmployeeNumber] = useState([]);
+
 	// This function is used to check and confirm the end points
 	const checkIncidentType = () => {
-		let baseUrl = `http://localhost:9000/incidents`;
 		if (
 			(IncidentType.currentKey === "denial") |
 			(IncidentType.currentKey === "intrusion") |
@@ -27,34 +30,47 @@ export default function Home() {
 	};
 
 	//This function is used to fetch the data, could use some error handling
-	const fetchData = async () => {
+	const fetchIncidentData = async () => {
+		let url;
 		try {
-			let url = checkIncidentType();
-			let response = await fetch(url);
-			let data = await response.json();
-			setIncidentReport(data.results);
+			url = checkIncidentType();
+			if (url) {
+				let response = await fetch(url);
+				let IncidentData = await response.json();
+				// console.log("finally" + JSON.stringify(data));
+				setIncidentReport(IncidentData);
+			}
 		} catch (error) {
 			console.error(error);
-		} finally {
-			console.log(incidentReport);
+	};
+
+	const fetchEmployeeData = async () => {
+		let url = "http:localhost:9000/identities";
+		try {
+			let response = await fetch(url);
+			let EmployeeData = await response.json();
+			setEmployeeNumber(EmployeeData);
+		} catch (error) {
+			console.error(error);
 		}
 	};
 
 	// fetching the data based on each change of Incident type
 	useEffect(() => {
-		fetchData();
+		fetchIncidentData();
+		fetchEmployeeData()
 	}, [IncidentType]);
 
 	return (
 		<NextUIProvider>
-			<Header
-				setIncidentType={setIncidentType}
-				IncidentType={IncidentType}
-			></Header>
-			<DataTable
-				incidentReport={incidentReport}
-				IncidentType={IncidentType}
-			></DataTable>
+			{/* providing the data to the tables using a useContext */}
+			<Context.Provider value={incidentReport, employeeNumber}>
+				<Header
+					setIncidentType={setIncidentType}
+					IncidentType={IncidentType}
+				></Header>
+				<DataTable IncidentType={IncidentType}></DataTable>
+			</Context.Provider>
 		</NextUIProvider>
 	);
 }
