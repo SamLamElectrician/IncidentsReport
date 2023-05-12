@@ -8,7 +8,7 @@ Using a flask backend
 2. Start your venv using ```cd flaskServer && env/Scripts/activate``` and on linux based machines ```cd flaskServer && env/bin/activate```
 3. Install the packages of Flask, Flask-Cors, os, requests, pandas, dotenv using ```pip3 install <packageName>```
 4. Add Login and Password to an ENV file
-5.Run the following command in your terminal ```python app.py``` to start the server
+5. Run the following command in your terminal ```python app.py``` to start the server
 
 *Windows computer might have issues due to pip not install properly
 1. Using the windows search bar, search ```%appdata% and open it
