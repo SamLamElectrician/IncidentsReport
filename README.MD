@@ -11,7 +11,7 @@ Using a flask backend<br />
 4. Add login credentials (username and password) to an environment (ENV) file.<br />
 5. Run the following command in your terminal to start the server: ```python app.py```<br />
 
-***Note for Windows Users: If you encounter issues with pip installation, follow these steps:
+**Note for Windows Users: If you encounter issues with pip installation, follow these steps:**
 
 1. Use the Windows search bar to search for %appdata% and open it.
 2. Navigate one folder up and go into the Local folder.
