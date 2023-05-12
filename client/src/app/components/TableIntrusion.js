@@ -6,6 +6,7 @@ import { formatDate } from "../utils/timeConvert";
 import { Input } from "@nextui-org/react";
 
 export default function TableIntrusion() {
+	//using the data to display content
 	const data = useContext(Context);
 	return (
 		<div>

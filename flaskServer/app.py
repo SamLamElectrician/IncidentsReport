@@ -45,6 +45,7 @@ def specific_incidents(incident_type):
         if response.status_code == 200:
             ip_to_employee = response.json()
 
+        # compares and switches out ip for employee id
         for result in incidents['results']:
             if 'internal_ip' in result:
                 if result['internal_ip'] in ip_to_employee:
@@ -56,7 +57,7 @@ def specific_incidents(incident_type):
 
     return jsonify(incidents)
     
-
+# data endpoint for backedn to me used
 @app.route('/identities')
 def get_employee_ids():
     response = requests.get(f'{BASE_URL}identities/', auth=(USERNAME, PASSWORD))

@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import TableDenial from "./TableDenial";
 import TableExecutable from "./TableExecutable";
 import TableIntrusion from "./TableIntrusion";
 import tableStyle from "../styles/table.module.css";
 
 export default function DataTable({ IncidentType }) {
-	// kind of screwed up here imo with using set
-	// returns data based on whats selected
+	// returns data based on whats selected based on the docs
 	const type = [...IncidentType];
-	console.log(type);
-	const [loading, setLoading] = useState(true);
 
+	//returns table based on what incident type it is
 	if (type[0] == "denial") {
-		return <TableDenial loading={loading} setLoading={setLoading} />;
+		return <TableDenial />;
 	} else if (type[0] == "intrusion") {
 		return <TableIntrusion />;
 	} else if (type[0] == "executable") {
