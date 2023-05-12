@@ -11,7 +11,7 @@ Using a flask backend
 5. Run the following command in your terminal ```python app.py``` to start the server
 
 *Windows computer might have issues due to pip not install properly
-1. Using the windows search bar, search ```%appdata% and open it
+1. Using the windows search bar, search %appdata% and open it
 2. Navigate one folder up and go into Local folder
 3. Navigate one folder down to Local folder
 4. Copy the path to your python
