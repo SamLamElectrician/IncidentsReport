@@ -1,4 +1,7 @@
 # How to Run
+![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/923c0e00-f349-4319-83bb-0c3e13cfc6ba)
+![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/6b99bbc7-c99a-4b8e-b99d-8c885dd0a85c)
+
 
 ### Backend
 
