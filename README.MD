@@ -42,3 +42,4 @@ I am actively working on improving the project with the following enhancements:
 -Implementing a search function to enhance user experience.<br />
 -Exploring the possibility of data transmutation for graph creation in the future.<br /> -~~Adding a loading state for better user feedback. There was a bug with conditional rendering in Next UI, which I'm in the process of resolving.~~<br /> -~~Implementing color coding to indicate the criticality of risks.~~<br />
 -Further improving my knowledge of Pandas to avoid using lambda functions, as they have an O(N^2) time complexity.<br />
+-fully utilizing the sever side rendering with next
