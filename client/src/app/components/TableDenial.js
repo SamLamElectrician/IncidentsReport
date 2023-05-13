@@ -4,6 +4,7 @@ import { Table } from "@nextui-org/react";
 import tableStyles from "../styles/table.module.css";
 import { formatDate } from "../utils/timeConvert";
 import { Input } from "@nextui-org/react";
+import { StyledBadge } from "./StyledBadge";
 
 export default function TableDenial() {
 	const data = useContext(Context);
@@ -37,7 +38,12 @@ export default function TableDenial() {
 							data.results.map(
 								({ priority, reported_by, source_ip, timestamp }, index) => (
 									<Table.Row key={index}>
-										<Table.Cell>{priority.toUpperCase()}</Table.Cell>
+										<Table.Cell>
+											<StyledBadge type={priority}>
+												{priority.toUpperCase()}
+											</StyledBadge>
+										</Table.Cell>
+
 										<Table.Cell>{reported_by}</Table.Cell>
 										<Table.Cell>{source_ip}</Table.Cell>
 										<Table.Cell>{formatDate(timestamp)}</Table.Cell>

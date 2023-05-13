@@ -3,17 +3,25 @@ import TableDenial from "./TableDenial";
 import TableExecutable from "./TableExecutable";
 import TableIntrusion from "./TableIntrusion";
 import tableStyle from "../styles/table.module.css";
+import { Loading } from "@nextui-org/react";
 
-export default function DataTable({ IncidentType }) {
+export default function DataTable({ IncidentType, loading }) {
 	// returns data based on whats selected based on the docs
 	const type = [...IncidentType];
+	console.log(loading);
 
 	//returns table based on what incident type it is
-	if (type[0] == "denial") {
+	if (loading) {
+		return (
+			<Loading size='xl' text='Primary' className={tableStyle.loadStyle}>
+				Loading{" "}
+			</Loading>
+		);
+	} else if (type[0] == "denial" && !loading) {
 		return <TableDenial />;
-	} else if (type[0] == "intrusion") {
+	} else if (type[0] == "intrusion" && !loading) {
 		return <TableIntrusion />;
-	} else if (type[0] == "executable") {
+	} else if (type[0] == "executable" && !loading) {
 		return <TableExecutable />;
 	} else {
 		return (

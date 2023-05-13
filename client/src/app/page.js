@@ -12,6 +12,7 @@ export default function Home() {
 	const [IncidentType, setIncidentType] = useState(new Set(["all"]));
 	//state to store data
 	const [incidentReport, setIncidentReport] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	// This function is used to check and confirm the end points
 	const checkIncidentType = () => {
@@ -29,6 +30,7 @@ export default function Home() {
 	//This function is used to fetch the data
 	const fetchIncidentData = async () => {
 		try {
+			setLoading(true);
 			const url = checkIncidentType();
 			const response = await fetch(url);
 			if (!response.ok) {
@@ -38,6 +40,8 @@ export default function Home() {
 			setIncidentReport(incidentData);
 		} catch (error) {
 			console.error("Error fetching incident data:", error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -55,7 +59,7 @@ export default function Home() {
 					setIncidentType={setIncidentType}
 					IncidentType={IncidentType}
 				></Header>
-				<DataTable IncidentType={IncidentType}></DataTable>
+				<DataTable IncidentType={IncidentType} loading={loading}></DataTable>
 			</Context.Provider>
 		</NextUIProvider>
 	);

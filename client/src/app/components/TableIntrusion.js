@@ -4,6 +4,7 @@ import { Table } from "@nextui-org/react";
 import tableStyles from "../styles/table.module.css";
 import { formatDate } from "../utils/timeConvert";
 import { Input } from "@nextui-org/react";
+import { StyledBadge } from "./StyledBadge";
 
 export default function TableIntrusion() {
 	//using the data to display content
@@ -42,7 +43,11 @@ export default function TableIntrusion() {
 							data.results.map(
 								({ priority, internal_ip, source_ip, timestamp }, index) => (
 									<Table.Row key={index}>
-										<Table.Cell>{priority.toUpperCase()}</Table.Cell>
+										<Table.Cell>
+											<StyledBadge type={priority}>
+												{priority.toUpperCase()}
+											</StyledBadge>
+										</Table.Cell>
 										<Table.Cell>{internal_ip}</Table.Cell>
 										<Table.Cell>{source_ip}</Table.Cell>
 										<Table.Cell>{formatDate(timestamp)}</Table.Cell>

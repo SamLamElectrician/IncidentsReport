@@ -3,6 +3,7 @@ import { Context } from "../page";
 import { Table } from "@nextui-org/react";
 import tableStyles from "../styles/table.module.css";
 import { formatDate } from "../utils/timeConvert";
+import { StyledBadge } from "./StyledBadge";
 
 import { Input } from "@nextui-org/react";
 
@@ -35,7 +36,11 @@ export default function TableExecutable() {
 						{Array.isArray(data.results) &&
 							data.results.map(({ priority, machine_ip, timestamp }, index) => (
 								<Table.Row key={index}>
-									<Table.Cell>{priority.toUpperCase()}</Table.Cell>
+									<Table.Cell>
+										<StyledBadge type={priority}>
+											{priority.toUpperCase()}
+										</StyledBadge>
+									</Table.Cell>
 									<Table.Cell>{machine_ip}</Table.Cell>
 									<Table.Cell>{formatDate(timestamp)}</Table.Cell>
 								</Table.Row>
