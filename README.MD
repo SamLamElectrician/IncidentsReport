@@ -1,8 +1,11 @@
 # How to Run
+**homepage**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/923c0e00-f349-4319-83bb-0c3e13cfc6ba)
+**Data presented in a table**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/70235162-af25-4bc1-8986-06b1f90ae856)
 **Additional wireframing to visualize data**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/2997d767-760e-401d-86e4-91ce9e35cbc9)
+**how my final data was presented**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/e09b7256-90fd-44d0-8cdc-39508a133e22)
 
 
@@ -38,13 +41,13 @@ Using a flask backend<br />
 
 For the backend, I chose Flask because it is part of Elevate's current backend stack. To protect sensitive login credentials and prevent financial loss if they get exposed, I used the dotenv package. Additionally, I utilized Python's built-in template strings to ensure a DRY (Don't Repeat Yourself) approach.
 
-To manipulate the data fetched from the employee data source, I used the Pandas library to replace the IP address with the employee number and return the final result. I chose Pandas over JavaScript because it provided more efficient execution.
+To manipulate the data fetched from the employee data source, I used the Pandas library to replace the IP address with the employee number and return the final result. I chose Pandas over Dictionaries because it provided more efficient execution. I used pandas to manipulate the data by renaming certain columns, normalizing the data, mapping employee ID to employee number, and creating new columns. It help standardize the data
 
 While Express was a consideration, I found Flask to be extremely efficient and recently picked it up, making it a suitable choice for this project.
 
 ### Frontend
 
-I opted for Next.js for the frontend because React is recently deprecated and no longer supported. Although I didn't fully utilize Next.js's server-side rendering capabilities, I used Next UI as a clean and efficient approach to displaying tables with the correct data. It was my preferred option over using Jinja templating due to the robustness of Next.js.
+I opted for Next.js for the frontend because React is recently deprecated and no longer supported. Although I didn't fully utilize Next.js's server-side rendering capabilities, I used Next UI as a clean and efficient approach to displaying tables with the correct data. It was my preferred option over using Jinja templating due to the robustness of Next.js. 
 
 # Improvements
 
@@ -52,5 +55,7 @@ I am actively working on improving the project with the following enhancements:
 
 -Implementing a search function to enhance user experience.<br />
 -Exploring the possibility of data transmutation for graph creation in the future.<br /> -~~Adding a loading state for better user feedback. There was a bug with conditional rendering in Next UI, which I'm in the process of resolving.~~<br /> -~~Implementing color coding to indicate the criticality of risks.~~<br />
--Further improving my knowledge of Pandas to avoid using lambda functions, as they have an O(N^2) time complexity.<br />
+-~~Further improving my knowledge of Pandas to avoid using lambda functions, as they have an O(N^2) time complexity.~~ <br />
 -fully utilizing the sever side rendering with next
+-docker to deploy and standardize how a client would see it without having the packages
+-sorting the data in the backend rather than frontend
