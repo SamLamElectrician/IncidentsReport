@@ -27,10 +27,8 @@ export default function Header({ IncidentType, setIncidentType }) {
 					selectedKeys={IncidentType}
 					onSelectionChange={setIncidentType}
 				>
+					<Dropdown.Item key='None'>none</Dropdown.Item>
 					<Dropdown.Item key='all'>all</Dropdown.Item>
-					<Dropdown.Item key='denial'>Denial</Dropdown.Item>
-					<Dropdown.Item key='intrusion'>Intrusions</Dropdown.Item>
-					<Dropdown.Item key='executable'>Executable</Dropdown.Item>
 				</Dropdown.Menu>
 			</Dropdown>
 		</div>

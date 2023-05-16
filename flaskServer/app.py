@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import requests
 import pandas as pd
 
+
 # load environment variables
 load_dotenv()
 USERNAME = os.getenv("LOGIN")
@@ -23,41 +24,43 @@ def get_incidents(incident_type):
     return response.json()
 
 
-# fetch all incidents
+def reverse_dict(d):
+    return {v: k for k, v in d.items()}
+
+def transpose_data(incident_type, ip_to_employee):
+    employee_to_ip = reverse_dict(ip_to_employee)
+    incidents = get_incidents(incident_type)
+    df = pd.DataFrame(incidents['results'])
+    # Add 'incident_type' column
+    df['incident_report'] = incident_type
+    # Add 'employeeID', 'internal_ip', and 'machine_ip' fields by mapping from relevant fields
+    if 'reported_by' in df.columns:
+        df['internal_ip'] = df['reported_by'].map(employee_to_ip).fillna(df['reported_by'])
+        df = df.drop('reported_by', axis=1)
+    if 'internal_ip' in df.columns:
+        df['employee_id'] = df['internal_ip'].map(ip_to_employee).fillna(df['internal_ip'])
+    if 'machine_ip' in df.columns:
+        df['employee_id'] = df['machine_ip'].map(ip_to_employee).fillna(df['machine_ip'])
+        df.rename(columns={"machine_ip": "internal_ip"}, inplace=True)
+        
+    # Convert DataFrame back to dictionary
+    incidents['results'] = df.to_dict('records')
+
+    return incidents
+
+    
 @app.route('/incidents')
 def incidents():
     types = ['denial', 'intrusion', 'executable']
-    incidents = [get_incidents(incident_type) for incident_type in types]
-    return jsonify(incidents)
-
-# fetch specific incident types
-@app.route('/incidents/<incident_type>/')
-def specific_incidents(incident_type):
-    incidents = get_incidents(incident_type)
     response = requests.get(f'{BASE_URL}identities/', auth=(USERNAME, PASSWORD))
     if response.status_code == 200:
         ip_to_employee = response.json()
+        incidents = [transpose_data(incident_type, ip_to_employee) for incident_type in types]
+        return jsonify(incidents)
+    return jsonify([]) 
 
-        # Convert the incidents to a pandas DataFrame
-        df = pd.DataFrame(incidents['results'])
-        print(df)
-        # Replace the values in the 'internal_ip' column with the employee numbers, if 'internal_ip' column exists
-        if response.status_code == 200:
-            ip_to_employee = response.json()
-
-        # compares and switches out ip for employee id
-        for result in incidents['results']:
-            if 'internal_ip' in result:
-                if result['internal_ip'] in ip_to_employee:
-                    result['internal_ip'] = ip_to_employee[result['internal_ip']]
-            
-            if 'machine_ip' in result:
-                if result['machine_ip'] in ip_to_employee:
-                    result['machine_ip'] = ip_to_employee[result['machine_ip']]
-
-    return jsonify(incidents)
     
-# data endpoint for backedn to me used
+# data endpoint for backend to be used
 @app.route('/identities')
 def get_employee_ids():
     response = requests.get(f'{BASE_URL}identities/', auth=(USERNAME, PASSWORD))

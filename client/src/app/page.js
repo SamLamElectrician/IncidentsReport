@@ -9,13 +9,14 @@ export const Context = createContext();
 
 export default function Home() {
 	//use this use state to set the fetch call to store incident type
-	const [IncidentType, setIncidentType] = useState(new Set(["all"]));
+	const [IncidentType, setIncidentType] = useState(new Set(["none"]));
 	//state to store data
 	const [incidentReport, setIncidentReport] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	// This function is used to check and confirm the end points
 	const checkIncidentType = () => {
+		const baseUrl = "http://localhost:9000/incidents";
 		if (
 			(IncidentType.currentKey === "denial") |
 			(IncidentType.currentKey === "intrusion") |
@@ -24,6 +25,8 @@ export default function Home() {
 			let incidentUrl = `http://localhost:9000/incidents/${IncidentType.currentKey}/`;
 
 			return incidentUrl;
+		} else {
+			return baseUrl;
 		}
 	};
 
@@ -36,7 +39,8 @@ export default function Home() {
 			if (!response.ok) {
 				throw new Error(`HTTP error! status: ${response.status}`);
 			}
-			const incidentData = await response.json();
+			const responseData = await response.json();
+			const incidentData = responseData.flatMap((item) => item.results);
 			setIncidentReport(incidentData);
 		} catch (error) {
 			console.error("Error fetching incident data:", error);
