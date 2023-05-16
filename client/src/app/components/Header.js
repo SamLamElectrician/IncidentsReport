@@ -4,6 +4,8 @@ import headerStyle from "../styles/header.module.css";
 import { Dropdown } from "@nextui-org/react";
 
 export default function Header({ IncidentType, setIncidentType }) {
+	// using set due to nextUI library requirements for dropdown
+	// this component keeps track of the selected incident type
 	const selectedValue = React.useMemo(
 		() => Array.from(IncidentType).join(", ").replaceAll("_", " "),
 		[IncidentType]
@@ -27,7 +29,7 @@ export default function Header({ IncidentType, setIncidentType }) {
 					selectedKeys={IncidentType}
 					onSelectionChange={setIncidentType}
 				>
-					<Dropdown.Item key='None'>none</Dropdown.Item>
+					<Dropdown.Item key='none'>none</Dropdown.Item>
 					<Dropdown.Item key='all'>all</Dropdown.Item>
 				</Dropdown.Menu>
 			</Dropdown>

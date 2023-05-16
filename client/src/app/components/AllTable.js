@@ -8,8 +8,9 @@ import { StyledBadge } from "./StyledBadge";
 import { Input } from "@nextui-org/react";
 
 export default function All() {
+	// using data through use context to avoid propdrilling and return the map data
 	const data = useContext(Context);
-	console.log("denial:" + data);
+
 	return (
 		<div className={tableStyles.wrapper}>
 			<div className={tableStyles.tableHeader}>
@@ -37,6 +38,7 @@ export default function All() {
 						<Table.Column>Date</Table.Column>
 					</Table.Header>
 					<Table.Body>
+						{/* sort the data by time stamp and map it out */}
 						{Array.isArray(data) &&
 							data
 								.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
@@ -68,43 +70,13 @@ export default function All() {
 										</Table.Row>
 									)
 								)}
-						{/* {Array.isArray(data) &&
-							data.map(
-								(
-									{
-										employee_id,
-										incident_report,
-										priority,
-										internal_ip,
-										source_ip,
-										timestamp,
-									},
-									index
-								) => (
-									<Table.Row key={index}>
-										<Table.Cell>
-											<StyledBadge type={priority}>
-												{priority.toUpperCase()}
-											</StyledBadge>
-										</Table.Cell>
-										<Table.Cell>{incident_report}</Table.Cell>
-										<Table.Cell>{employee_id}</Table.Cell>
-										<Table.Cell>{internal_ip}</Table.Cell>
-										<Table.Cell>
-											{source_ip ? source_ip : "Not Available"}
-										</Table.Cell>
-
-										<Table.Cell>{timestamp}</Table.Cell>
-									</Table.Row>
-								)
-							)} */}
 					</Table.Body>
 					<Table.Pagination
 						shadow
 						noMargin
 						align='center'
 						rowsPerPage={25}
-						onPageChange={(page) => console.log({ page })}
+						onPageChange={(page) => ({})}
 					/>
 				</Table>
 			</div>

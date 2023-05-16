@@ -1,6 +1,7 @@
 import React from "react";
 import tableStyle from "../styles/table.module.css";
 export default function HomePage() {
+	// general homepage
 	return (
 		<>
 			<div className={tableStyle.wrapperNoTable}>
