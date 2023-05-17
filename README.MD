@@ -2,7 +2,7 @@
 **homepage**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/923c0e00-f349-4319-83bb-0c3e13cfc6ba)
 **Data presented in a table**
-![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/70235162-af25-4bc1-8986-06b1f90ae856)
+![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/1500dca6-166f-4263-89ac-47fabc51741f)
 **Additional wireframing to visualize data**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/2997d767-760e-401d-86e4-91ce9e35cbc9)
 **how my final data was presented**
