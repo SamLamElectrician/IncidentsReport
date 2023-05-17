@@ -77,12 +77,7 @@ def incidents():
 
 
 
-    
-# data endpoint for backend to be used
-@app.route('/identities')
-def get_employee_ids():
-    response = requests.get(f'{BASE_URL}identities/', auth=(USERNAME, PASSWORD))
-    return jsonify(response.json())
+
 
 
 if __name__ == "__main__":
