@@ -9,7 +9,7 @@
 **App Architecture**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/fbaef011-6f1a-4e45-a38b-436b86db0147)
 **Additional wireframing to visualize data**
-![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/2997d767-760e-401d-86e4-91ce9e35cbc9)
+![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/9daea58f-9156-4d13-8b44-1be0795d958e)
 **how my final data was presented**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/e09b7256-90fd-44d0-8cdc-39508a133e22)
 
