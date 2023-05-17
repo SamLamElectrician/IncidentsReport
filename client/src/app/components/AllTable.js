@@ -14,7 +14,7 @@ export default function All() {
 	return (
 		<div className={tableStyles.wrapper}>
 			<div className={tableStyles.tableHeader}>
-				<h3>DATA FOR EXECUTABLE INCIDENTS</h3>
+				<h3>DATA FOR ALL INCIDENTS</h3>
 				<Input placeholder='Search' bordered />
 			</div>
 			<div className={tableStyles.tableContainer}>
