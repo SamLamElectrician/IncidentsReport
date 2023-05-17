@@ -10,6 +10,7 @@ import { Input } from "@nextui-org/react";
 export default function All() {
 	// using data through use context to avoid propdrilling and return the map data
 	const data = useContext(Context);
+	console.log(data);
 
 	return (
 		<div className={tableStyles.wrapper}>
@@ -40,36 +41,34 @@ export default function All() {
 					<Table.Body>
 						{/* sort the data by time stamp and map it out */}
 						{Array.isArray(data) &&
-							data
-								.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
-								.map(
-									(
-										{
-											employee_id,
-											incident_report,
-											priority,
-											internal_ip,
-											source_ip,
-											timestamp,
-										},
-										index
-									) => (
-										<Table.Row key={index}>
-											<Table.Cell>
-												<StyledBadge type={priority}>
-													{priority.toUpperCase()}
-												</StyledBadge>
-											</Table.Cell>
-											<Table.Cell>{incident_report.toUpperCase()}</Table.Cell>
-											<Table.Cell>{employee_id}</Table.Cell>
-											<Table.Cell>{internal_ip}</Table.Cell>
-											<Table.Cell>
-												{source_ip ? source_ip : "Not Available"}
-											</Table.Cell>
-											<Table.Cell>{formatDate(timestamp)}</Table.Cell>
-										</Table.Row>
-									)
-								)}
+							data.map(
+								(
+									{
+										employee_id,
+										incident_report,
+										priority,
+										internal_ip,
+										source_ip,
+										timestamp,
+									},
+									index
+								) => (
+									<Table.Row key={index}>
+										<Table.Cell>
+											<StyledBadge type={priority}>
+												{priority.toUpperCase()}
+											</StyledBadge>
+										</Table.Cell>
+										<Table.Cell>{incident_report.toUpperCase()}</Table.Cell>
+										<Table.Cell>{employee_id}</Table.Cell>
+										<Table.Cell>{internal_ip}</Table.Cell>
+										<Table.Cell>
+											{source_ip ? source_ip : "Not Available"}
+										</Table.Cell>
+										<Table.Cell>{formatDate(timestamp)}</Table.Cell>
+									</Table.Row>
+								)
+							)}
 					</Table.Body>
 					<Table.Pagination
 						shadow

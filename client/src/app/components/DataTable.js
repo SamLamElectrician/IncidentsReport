@@ -6,7 +6,7 @@ import HomePage from "./HomePage";
 
 export default function DataTable({ IncidentType, loading }) {
 	const type = [...IncidentType];
-	console.log(type[0]);
+
 	// returning either homepage or data or loading depending on the state of loading
 
 	if ((!loading && type[0] == undefined) || type[0] == "none") {

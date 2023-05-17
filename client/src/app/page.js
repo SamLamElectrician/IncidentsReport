@@ -41,11 +41,13 @@ export default function Home() {
 				throw new Error(`HTTP error! status: ${response.status}`);
 			}
 			const responseData = await response.json();
-			const incidentData = responseData.flatMap((item) => item.results);
-			setIncidentReport(incidentData);
+			setIncidentReport(responseData);
+			console.log("response: " + responseData);
 		} catch (error) {
+			console.log("error");
 			console.error("Error fetching incident data:", error);
 		} finally {
+			console.log("failure");
 			setLoading(false);
 		}
 	};

@@ -52,9 +52,9 @@ def transpose_data(incident_type, ip_to_employee):
         df.rename(columns={"machine_ip": "internal_ip"}, inplace=True)
     
     # Convert DataFrame back to dictionary
-    incidents['results'] = df.to_dict('records')
+    # incidents['results'] = df.to_dict('records')
 
-    return incidents
+    return df
 
     
 @app.route('/incidents')
@@ -65,8 +65,15 @@ def incidents():
     if response.status_code == 200:
         ip_to_employee = response.json()
         incidents = [transpose_data(incident_type, ip_to_employee) for incident_type in types]
-        return jsonify(incidents)
-    return jsonify([]) 
+        all_incidents = pd.concat(incidents)
+        # sorting via unix time
+        all_incidents['timestamp'] = pd.to_numeric(all_incidents['timestamp'])
+        # Sort by 'time_occurred'
+        all_incidents.sort_values(by='timestamp', inplace=True)
+        all_incidents.dropna(inplace=True)
+        # Convert sorted DataFrame back to JSON
+        return jsonify(all_incidents.to_dict('records'))
+    return jsonify([])
 
 
 
