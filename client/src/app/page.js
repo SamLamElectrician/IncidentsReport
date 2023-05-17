@@ -42,12 +42,9 @@ export default function Home() {
 			}
 			const responseData = await response.json();
 			setIncidentReport(responseData);
-			console.log("response: " + responseData);
 		} catch (error) {
-			console.log("error");
 			console.error("Error fetching incident data:", error);
 		} finally {
-			console.log("failure");
 			setLoading(false);
 		}
 	};
