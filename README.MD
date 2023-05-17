@@ -26,7 +26,8 @@ Using a flask backend<br />
 1. Enable your virtual environment (venv) by running `virtualenv env` in the terminal.<br /> 
 2. Install Packages using `pip install -r requirements.txt`
 3. Activate your virtual environment by running `cd flaskServer && env/Scripts/activate` on Windows or `cd flaskServer && env/bin/activate` on Linux-based machines.<br />
-4. Add login credentials (username and password) to an environment (ENV) file.<br /> 5. Run the following command in your terminal to start the server: `python app.py`<br />
+4. Add login credentials (username and password) to an environment (ENV) file.<br /> 
+5. Run the following command in your terminal to start the server: `python app.py`<br />
 
 **Note for Windows Users: If you encounter issues with pip installation, follow these steps:**
 
@@ -36,6 +37,8 @@ Using a flask backend<br />
 4. Copy the path to your Python installation.
 5. Open the command prompt and navigate to the Python folder using the cd command.
 6. To install any required packages, use the command `python -m pip install <packageName>`
+
+**Note: For either windows or linux, you would need a .env file with your login and password
 
 ### Frontend Instructions
 
