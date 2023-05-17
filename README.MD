@@ -19,7 +19,7 @@
 
 ## How to Run
 
-### Backend Instrictions
+### Backend Instructions
 
 Using a flask backend<br />
  
@@ -38,7 +38,7 @@ Using a flask backend<br />
 5. Open the command prompt and navigate to the Python folder using the cd command.
 6. To install any required packages, use the command `python -m pip install <packageName>`
 
-### Frontend
+### Frontend Instructions
 
 1. Navigate to the client folder using the command `cd client`
 2. Install the required packages from the package.json file using npm or yarn. `Run npm i`
