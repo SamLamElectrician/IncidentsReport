@@ -1,4 +1,7 @@
-# How to Run
+# Incident Report 
+
+## App Images and Architecture
+
 **homepage**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/923c0e00-f349-4319-83bb-0c3e13cfc6ba)
 **Data presented in a table**
@@ -6,7 +9,7 @@
 **App Architecture**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/fbaef011-6f1a-4e45-a38b-436b86db0147)
 **Additional wireframing to visualize data**
-![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/2997d767-760e-401d-86e4-91ce9e35cbc9)
+![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/9daea58f-9156-4d13-8b44-1be0795d958e)
 **how my final data was presented**
 ![image](https://github.com/SamLamElectrician/IncidentsReport/assets/99058689/e09b7256-90fd-44d0-8cdc-39508a133e22)
 
@@ -14,13 +17,17 @@
 
 
 
+## How to Run
 
-
-### Backend
+### Backend Instructions
 
 Using a flask backend<br />
-
-1.Enable your virtual environment (venv) by running `virtualenv env` in the terminal.<br /> 2. Activate your virtual environment by running `cd flaskServer && env/Scripts/activate` on Windows or `cd flaskServer && env/bin/activate` on Linux-based machines.<br /> 3. Install the required packages: Flask, Flask-Cors, os, requests, pandas, and dotenv. You can use the command `pip3 install <packageName>`<br /> 4. Add login credentials (username and password) to an environment (ENV) file.<br /> 5. Run the following command in your terminal to start the server: `python app.py`<br />
+ 
+1. Enable your virtual environment (venv) by running `virtualenv env` in the terminal.<br /> 
+2. Install Packages using `pip install -r requirements.txt`
+3. Activate your virtual environment by running `cd flaskServer && env/Scripts/activate` on Windows or `cd flaskServer && env/bin/activate` on Linux-based machines.<br />
+4. Add login credentials (username and password) to an environment (ENV) file.<br /> 
+5. Run the following command in your terminal to start the server: `python app.py`<br />
 
 **Note for Windows Users: If you encounter issues with pip installation, follow these steps:**
 
@@ -31,7 +38,9 @@ Using a flask backend<br />
 5. Open the command prompt and navigate to the Python folder using the cd command.
 6. To install any required packages, use the command `python -m pip install <packageName>`
 
-### Frontend
+**Note: For either windows or linux, you would need a .env file with your login and password
+
+### Frontend Instructions
 
 1. Navigate to the client folder using the command `cd client`
 2. Install the required packages from the package.json file using npm or yarn. `Run npm i`
