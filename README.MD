@@ -70,3 +70,4 @@ I am actively working on improving the project with the following enhancements:
 -fully utilizing the sever side rendering with next<br />
 -docker to deploy and standardize how a client would see it without having the packages<br />
 -~~sorting the data in the backend rather than frontend~~<br />
+https://docs.google.com/document/d/1UVnXQBwCiLAOHpRsoFrScJzZupio9fSfE9ZH06GFygE/edit?usp=sharing
