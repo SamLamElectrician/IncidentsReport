@@ -10,6 +10,7 @@ import { Input } from "@nextui-org/react";
 export default function All() {
 	// using data through use context to avoid propdrilling and return the map data
 	const data = useContext(Context);
+	console.log(data);
 	return (
 		<div className={tableStyles.wrapper}>
 			<div className={tableStyles.tableHeader}>

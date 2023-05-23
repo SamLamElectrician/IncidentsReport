@@ -4,6 +4,9 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 import requests
 import pandas as pd
+import threading
+
+incident_data_saved = None
 
 
 # load environment variables
@@ -39,26 +42,25 @@ def transpose_data(incident_type, ip_to_employee):
     df['incident_report'] = incident_type
     # Add 'employeeID', 'internal_ip', and 'machine_ip' fields by mapping from relevant fields
     if 'reported_by' in df.columns:
+        df.rename(columns={"reported_by": "employee_id"}, inplace=True)
         # creating an internal ip if there is a reported by column
-        df['internal_ip'] = df['reported_by'].map(employee_to_ip).fillna(df['reported_by'])
-        # deleting the reported by column to make data more uniform
-        df = df.drop('reported_by', axis=1)
     if 'internal_ip' in df.columns:
         # adding employee id associated with internal ip
-        df['employee_id'] = df['internal_ip'].map(ip_to_employee).fillna(df['internal_ip'])
+        df['employee_id'] = df['internal_ip'].map(ip_to_employee)
     if 'machine_ip' in df.columns:
         # adding employee id associated with machine ip
-        df['employee_id'] = df['machine_ip'].map(ip_to_employee).fillna(df['machine_ip'])
+        df['employee_id'] = df['machine_ip'].map(ip_to_employee)
         df.rename(columns={"machine_ip": "internal_ip"}, inplace=True)
-    
-    # Convert DataFrame back to dictionary
-    # incidents['results'] = df.to_dict('records')
-
     return df
 
     
 @app.route('/incidents')
 def incidents():
+    return jsonify(incident_data_saved)
+
+
+def background_get_incidents():
+    global incident_data_saved
     types = ['denial', 'intrusion', 'executable']
     response = requests.get(f'{BASE_URL}identities/', auth=(USERNAME, PASSWORD))
     # mapping through the data to transpose the data to return it
@@ -72,15 +74,12 @@ def incidents():
         all_incidents.sort_values(by='timestamp', inplace=True)
         all_incidents.dropna(inplace=True)
         # Convert sorted DataFrame back to JSON
-        return jsonify(all_incidents.to_dict('records'))
-    return jsonify([])
-
-
-
-
-
+        incident_data_saved = all_incidents.to_dict('records')
+    threading.Timer(30, background_get_incidents).start()
+    
 
 if __name__ == "__main__":
+    background_get_incidents()
     app.run(port=9000)
 
 
