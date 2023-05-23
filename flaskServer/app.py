@@ -41,16 +41,19 @@ def transpose_data(incident_type, ip_to_employee):
     # Add 'incident_type' column
     df['incident_report'] = incident_type
     # Add 'employeeID', 'internal_ip', and 'machine_ip' fields by mapping from relevant fields
-    if 'reported_by' in df.columns:
+    if 'reported_by' in df.columns and incident_type == 'denial':
+        df['internal_ip'] = df['reported_by'].map(employee_to_ip)
         df.rename(columns={"reported_by": "employee_id"}, inplace=True)
         # creating an internal ip if there is a reported by column
-    if 'internal_ip' in df.columns:
+    if 'internal_ip' in df.columns and incident_type == 'intrusion':
         # adding employee id associated with internal ip
         df['employee_id'] = df['internal_ip'].map(ip_to_employee)
-    if 'machine_ip' in df.columns:
+    if 'machine_ip' in df.columns and incident_type == 'executable':
         # adding employee id associated with machine ip
         df['employee_id'] = df['machine_ip'].map(ip_to_employee)
         df.rename(columns={"machine_ip": "internal_ip"}, inplace=True)
+    if 'source_ip' not in df.columns and incident_type == 'executable':
+        df['source_ip'] = "Not Available"
     return df
 
     
@@ -71,7 +74,7 @@ def background_get_incidents():
         # sorting via unix time
         all_incidents['timestamp'] = pd.to_numeric(all_incidents['timestamp'])
         # Sort by 'time_occurred'
-        all_incidents.sort_values(by='timestamp', inplace=True)
+        all_incidents.sort_values(by='timestamp', inplace=True, ascending=False)
         all_incidents.dropna(inplace=True)
         # Convert sorted DataFrame back to JSON
         incident_data_saved = all_incidents.to_dict('records')
