@@ -24,8 +24,14 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # return data from URL
 def get_incidents(incident_type):
-    response = requests.get(f'{BASE_URL}incidents/{incident_type}/', auth=(USERNAME, PASSWORD))
-    return response.json()
+    try:
+        response = requests.get(f'{BASE_URL}incidents/{incident_type}/', auth=(USERNAME, PASSWORD))
+        response.raise_for_status()  # raise HTTPError if the response status code isn't 200
+        return response.json()
+    except RequestException as e:
+        print(f'Error fetching data: {e}')
+        return None
+
 
 # general function to sort for key values and reverse
 def reverse_dict(d):
